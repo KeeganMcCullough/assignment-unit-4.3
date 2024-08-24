@@ -5,11 +5,16 @@ console.log('***** Cart Functions *****');
 //this is for the items in our cart
 let basket = [];
 
+//this is our max items const for stretch goals
+const maxItems = 5;
+
 
 //adds an item to the basket
 function addItem(item){
-    basket.push(item);
-    return true;
+    if(isFull()){
+        return false
+    }
+    basket.push(item); return true;
 }
 
 console.log(`basket has these items: ${basket}`);
@@ -43,7 +48,32 @@ empty();
 console.log(`reset basket is: ${basket}`);
 
 
+//Stretch goal zone
 
+function isFull(){
+   return (basket.length >= maxItems);
+}
+
+function removeItem(item){
+    let ind = basket.indexOf(item);
+    if(ind == -1){
+        return null;
+    }
+    return basket.splice(ind, 1)[0];
+}
+
+//test
+
+console.log('is full?', isFull());
+for(i=0; i<6; i++){
+    addItem(i);
+}
+console.log(`${basket}`);
+console.log('is full? expecting true', isFull());
+console.log('can add item to full basket?', addItem('fullTest'));
+console.log(removeItem(2));
+console.log(`basket without 2 is ${basket}`);
+empty();
 
 
 
